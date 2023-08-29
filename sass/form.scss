@@ -1,0 +1,401 @@
+input,
+button,
+textarea,
+select {
+/* デフォルトスタイルをリセット */
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+
+/* font-familyを継承しないので、継承させる */
+font-family: inherit;
+
+/* iOSの角丸をリセット */
+border-radius: 0;
+
+/* box-size */
+box-sizing: border-box;
+
+/* 文字の大きさ iOSでズームさせないために16px以上を指定 */
+font-size: 16px;
+
+/* 文字色を親から継承 */
+color: inherit;
+}
+
+label {
+/* iOSでのlabelとinput,select,textareaの関連付け */
+cursor: pointer;
+}
+
+/* スピンボタン非表示 chrome,safari */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button,
+input[type="month"]::-webkit-outer-spin-button,
+input[type="month"]::-webkit-inner-spin-button,
+input[type="datetime-local"]::-webkit-outer-spin-button,
+input[type="datetime-local"]::-webkit-inner-spin-button,
+input[type="week"]::-webkit-outer-spin-button,
+input[type="week"]::-webkit-inner-spin-button,
+input[type="time"]::-webkit-outer-spin-button,
+input[type="time"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-outer-spin-button,
+input[type="date"]::-webkit-inner-spin-button {
+/*-webkit-appearance: none;
+margin: 0;*/
+display: none;
+}
+
+/* スピンボタン非表示(firefox) */
+input[type="number"],
+input[type="month"],
+input[type="datetime-local"],
+input[type="week"],
+input[type="time"],
+input[type="date"] {
+-moz-appearance: textfield;
+}
+
+/* クリアボタン非表示 */
+input[type="date"]::-webkit-clear-button,
+input[type="month"]::-webkit-clear-button,
+input[type="datetime-local"]::-webkit-clear-button,
+input[type="time"]::-webkit-clear-button,
+input[type="week"]::-webkit-clear-button {
+-webkit-appearance: none;
+}
+
+
+/* input */
+input {
+	/* 背景色(任意の色を指定) */
+	background-color: #eee;
+
+	/* inputの枠線を消す */
+	border: 1px solid transparent;
+	transition: border 0.2s ease-out;
+
+	/* 文字色を親から継承 */
+	color: inherit;
+
+	/* 任意の高さ */
+	height: 46px;
+
+	/*inputのフォーカス時の枠線を消す*/
+	outline: 0;
+}
+
+/* inputにフォーカスが当たっている時 */
+input:focus {
+	border-bottom: 2px solid rgb(64,117,28);
+}
+
+/* range */
+
+input[type=range] {
+	-webkit-appearance: none;
+	/* height: 46px; */
+}
+
+/* ツールチップ 非表示(ms) */
+input[type=range]::-ms-tooltip {
+	display: none;
+}
+
+/* ツマミ(webkit) */
+input[type=range]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	background: #fff;
+	border-radius: 50%;
+	box-shadow: 0 0 4px 0 #333;
+	cursor: pointer;
+	height: 20px;
+	width: 20px;
+	margin-top: -10px;
+	/* iOS safari */
+	border: none;
+}
+
+/* ツマミ(mozilla) */
+input[type=range]::-moz-range-thumb {
+	background-color: #fff;
+	border: none;
+	border-radius: 50%;
+	box-shadow: 0 0 4px 0 #333;
+	cursor: pointer;
+	height: 20px;
+	width: 20px;
+}
+
+/* ツマミ(ms) */
+input[type=range]::-ms-thumb {
+	background-color: #fff;
+	border: none;
+	border-radius: 50%;
+	box-shadow: 0 0 4px 0 #333;
+	cursor: pointer;
+	height: 20px;
+	width: 20px;
+	margin: 0 1px;
+}
+
+/* ツマミ(ms) chomeツマミ調整の影響を消す */
+@supports (-ms-ime-align: auto) {
+	input[type=range]::-webkit-slider-thumb {
+	margin-top: 0px !important;
+	}
+
+}
+
+/* 溝(mozilla) */
+input[type=range]::-moz-range-track {
+	height: 0;
+	border: 1px solid #333;
+}
+
+/* 溝(WebKit) */
+input[type=range]::-webkit-slider-runnable-track {
+	width: 100%;
+	height: 0;
+	cursor: pointer;
+	background: #cccccc;
+	border: 1px solid #333;
+	margin-top: 0px;
+}
+
+/* 溝(ms) */
+input[type=range]::-ms-track {
+	width: 100%;
+	height: 12px;
+	cursor: pointer;
+	background: transparent;
+	border-color: transparent;
+	border-width: 16px 0;
+	color: transparent;
+}
+
+/* 溝の位置調整(ie) */
+@media all and (-ms-high-contrast: none) {
+	input[type=range]::-ms-track {
+	margin-top: -5px !important;
+	}
+}
+
+/* 溝の色(ms)（つまみより左側） */
+input[type=range]::-ms-fill-lower {
+	background: #cccccc;
+	border: 0.2px solid #010101;
+	border-radius: 2.6px;
+	box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+
+/* 溝の色(ms)（つまみより右側） */
+input[type=range]::-ms-fill-upper {
+	background: #cccccc;
+	border: 0.2px solid #010101;
+	border-radius: 2.6px;
+	box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+
+/* 溝の色(ms)（つまみより左側）フォーカス時 */
+input[type=range]:focus::-ms-fill-lower {
+	background: #999999;
+}
+
+/* 溝の色(ms)（つまみより右側）フォーカス時 */
+input[type=range]:focus::-ms-fill-upper {
+	background: #999999;
+}
+
+/* radio */
+
+/* デフォルトのinputを隠す */
+input[type="radio"] {
+	display: initial;
+	position: relative;
+	opacity: 0;
+}
+
+/* ラベルの前の四角形を作る */
+input[type="radio"]+label::before {
+	content: "";
+	position: absolute;
+	border: 2px solid #343434;
+	width: 16px;
+	height: 16px;
+	margin-top: 4px;
+}
+
+/* ラベルの前の四角形のフォーカス時 */
+input[type="radio"]:focus+label::before {
+	border: 2px solid #e74c3c;
+}
+
+/* SVGの位置と大きさの指定 */
+input[type="radio"]+label>svg {
+	width: 20px;
+	height: 20px;
+	position: relative;
+	margin-right: 5px;
+	left: 3px;
+	top: 3px;
+}
+
+/* チェックマークの設定(未チェック時)  */
+input[type="radio"]+label>svg>path {
+	fill: none;
+	stroke: #27ae60;
+	stroke-linejoin: round;
+	stroke-linecap: round;
+	stroke-dasharray: 130;
+	stroke-dashoffset: 100;
+	stroke-opacity: 0;
+	stroke-width: 8px;
+	transition: stroke-dashoffset 0.2s ease-out;
+}
+
+/* チェックマークの設定(チェック時) */
+input[type="radio"]:checked+label>svg>path {
+	stroke-dashoffset: 0;
+	stroke-opacity: 1;
+}
+
+/* ラベルの位置調整 */
+input[type="radio"]+label {
+	left: -30px;
+	position: relative;
+}
+
+
+/* checkbox */
+/* デフォルトのinputを隠す */
+input[type="checkbox"] {
+	display: initial;
+	position: relative;
+	opacity: 0;
+}
+
+/* ラベルの前の四角形を作る */
+input[type="checkbox"]+label::before {
+	content: "";
+	position: absolute;
+	border: 2px solid #343434;
+	width: 16px;
+	height: 16px;
+	margin-top: 4px;
+}
+
+/* ラベルの前の四角形のフォーカス時 */
+input[type="checkbox"]:focus+label::before {
+	border: 2px solid #e74c3c;
+}
+
+/* SVGの位置と大きさの指定 */
+input[type="checkbox"]+label>svg {
+	width: 20px;
+	height: 20px;
+	position: relative;
+	margin-right: 5px;
+	left: 3px;
+	top: 2px;
+}
+
+/* チェックマークの設定(未チェック時)  */
+input[type="checkbox"]+label>svg>path {
+	fill: none;
+	stroke: #e74c3c;
+	stroke-linejoin: round;
+	stroke-linecap: round;
+	stroke-dasharray: 100;
+	stroke-dashoffset: 100;
+	stroke-opacity: 0;
+	stroke-width: 8px;
+	transition: stroke-dashoffset 0.1s ease-out;
+}
+
+/* チェックマークの設定(チェック時) */
+input[type="checkbox"]:checked+label>svg>path {
+	stroke-dashoffset: 0;
+	stroke-opacity: 1;
+}
+
+/* ラベルの位置調整 */
+input[type="checkbox"]+label {
+	left: -30px;
+	position: relative;
+}
+
+/* select */
+select {
+	/* 右端の▼を消す */
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	border: none;
+
+	/* 代わりに任意の画像を指定 */
+	background: #eee url(triangle_down.svg) no-repeat center right 10px/16px 16px;
+	background-size: 10px;
+}
+
+
+/* 右端の▼を消す(IE) */
+select::-ms-expand {
+	display: none;
+}
+
+select:focus {
+	background: #eee url(triangle_up.svg) no-repeat center right 10px/16px 16px;
+	background-size: 10px;
+	border-bottom: 1px solid#e74c3c;
+	outline: none;
+}
+
+/* button */
+button {
+	border: none;
+	border-radius: 4px;
+	display: table;
+	font-weight: bold;
+	line-height: 1;
+	outline: none;
+	padding: 6px 8px;
+	background: #eee;
+	transition: all 0.2s ease-out;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+button:hover {
+	opacity: 0.8;
+}
+
+
+/* placeholderの文字色指定 */
+input::placeholder,
+textarea::placeholder {
+color: #7f8c8d;
+}
+
+/* IE (疑似クラスで指定) */
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+color: #7f8c8d;
+
+}
+
+/* Edge (疑似要素で指定)*/
+input::-ms-input-placeholder,
+textarea::-ms-input-placeholder {
+color: #7f8c8d;
+}
+
+/* auto complete(chrome) */
+input:-webkit-autofill {
+	/* 背景色(background-colorではなくbox-shadow) */
+	-webkit-box-shadow: 0 0 0 1000px #eee inset;
+
+	/* 文字色(colorではなく-webkit-text-fill-color) */
+	-webkit-text-fill-color: #333 !important;
+}

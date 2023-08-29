@@ -1,0 +1,98 @@
+$breakpoints: (
+  "smu": "(min-width: 576px)",
+  "mdu": "(min-width: 768px)",
+  "lgu": "(min-width: 992px)",
+  "xlu": "(min-width: 1200px)",
+  "xsd": "(max-width: 575.98px)",
+  "smd": "(max-width: 767.98px)",
+  "mdd": "(max-width: 991.98px)",
+  "lgd": "(max-width: 1199.98px)",
+  "sm-only": "(max-width: 767.98px) and (min-width: 576px)",
+  "md-only": "(max-width: 991.98px) and (min-width: 768px)",
+  "lg-only": "(max-width: 1199.98px) and (min-width: 992px)"
+
+  // mq cheat sheet
+  //       576  768  992  1200  |(px)
+  //     xs | sm | md | lg | xl |
+  // smu:   |-------------------|
+  // mdu:        |--------------|
+  // lgu:             |---------|
+  // xlu:                  |----|
+  // xsd:---|                   |
+  // smd:--------|              |
+  // mdd:-------------|         |
+  // lgd:------------------|    |
+  //     xs | sm | md | lg | xl |
+);
+// メディアクエリー
+@mixin mq($breakpoint: mdu) {
+	@media #{map-get($breakpoints, $breakpoint)} {
+		@content;
+	}
+}
+// usage
+/*
+@include mq('mdu') { hoge }
+*/
+
+.smu, .mdu, .lgu, .xlu, .xsd, .smd, .mdd, .lgd, .sm-only, .md-only, .lg-only {
+  display: none;
+}
+
+.smu {
+  @include mq('smu') {
+    display: block;
+  }
+}
+.mdu {
+  @include mq('mdu') {
+    display: block;
+  }
+}
+.lgu {
+  @include mq('lgu') {
+    display: block;
+  }
+}
+.xlu {
+  @include mq('xlu') {
+    display: block;
+  }
+}
+
+.xsd {
+  @include mq('xsd') {
+    display: block;
+  }
+}
+.smd {
+  @include mq('smd') {
+    display: block;
+  }
+}
+.mdd {
+  @include mq('mdd') {
+    display: block;
+  }
+}
+.lgd {
+  @include mq('lgd') {
+    display: block;
+  }
+}
+// 指定したサイズ範囲のときのみ表示
+.sm-only {
+  @include mq('sm-only') {
+    display: block;
+  }
+}
+.md-only {
+  @include mq('md-only') {
+    display: block;
+  }
+}
+.lg-only {
+  @include mq('lg-only') {
+    display: block;
+  }
+}

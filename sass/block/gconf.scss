@@ -1,0 +1,53 @@
+.gconf {
+	display: none;
+	text-align: center;
+	padding-top: 30px;
+	padding-bottom: 20px;
+
+	&.active {
+		display: block;
+	}
+
+	&__head, &__inputs, &__templates {
+		width: 90%;
+		max-width: 400px;
+		margin: 0 auto;
+		margin-bottom: 30px;
+		display: flex;
+		overflow: hidden;
+		justify-content: center;
+		border-radius: 10px;
+	}
+
+	&__head {
+		border-radius: unset;
+		position: relative;
+		h2 {
+			font-size: 28px;
+			line-height: 28px;
+			margin-bottom: 0;
+		}
+
+		&-back {
+			position: absolute;
+			top: 0; left: 0;
+			height: 28px;
+		}
+	}
+
+	&__templates {
+		width: fit-content;
+		> button {
+			margin: 0;
+			font-size: 20px;
+			padding: 6px 12px;
+			border-radius: 0;
+		}
+	}
+
+	&__inputs input {
+		display: inline-block;
+		width: 100%;
+		min-width: 50px;
+	}
+}

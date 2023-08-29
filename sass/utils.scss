@@ -1,0 +1,105 @@
+.btn-reset {
+	background-color: transparent;
+	padding: 0; margin: 0;
+	border-radius: unset;
+}
+.text-grow {
+	font-weight: bold;
+	text-shadow: 
+		0 0 0.05em #FFF59D,
+		0 0 0.06em #FFF59D,
+		0 0 0.07em #FFF59D,
+		0 0 0.08em #FFF59D,
+		0 0 0.09em #FFF59D,
+		0 0 0.20em #FFF59D,
+		0 0 0.20em #FFF59D,
+		0 0 0.20em #FFF59D,
+		0 0 0.50em #FFF59D;
+}
+.box-grow {
+	font-weight: bold;
+	box-shadow:
+		0 0 0.05em #FFF59D,
+		0 0 0.06em #FFF59D,
+		0 0 0.07em #FFF59D,
+		0 0 0.08em #FFF59D,
+		0 0 0.09em #FFF59D,
+		0 0 0.20em #FFF59D,
+		0 0 0.20em #FFF59D,
+		0 0 0.20em #FFF59D,
+		0 0 0.50em #FFF59D;
+}
+
+.main-btn {
+	width: 300px;
+	font-size: 30px;
+	background: rgba(238, 208, 36, 0.3);
+	font-weight: bold;
+	margin: 0 auto;
+}
+.main-btn:hover {
+	opacity: 0.6;
+	transition: all 0.8s;
+}
+
+
+.btn-shima {
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 30px;
+	width: 80%;
+	font-size: 2rem;
+	padding: 1rem;
+	max-width: 300px;
+	border: 2px solid #000;
+	background-image: repeating-linear-gradient(
+	  -45deg,
+	  #000,
+	  #000 1px,
+	  transparent 2px,
+	  transparent 5px
+	);
+	background-size: 7px 7px;
+	backface-visibility: hidden;
+}
+.btn-shima > span {
+	position: relative;
+	display: block;
+	padding: 6px 12px;
+	color: #000;
+	border: 2px solid #000;
+	border-radius: 0.5rem;
+	background: #fff;
+}
+.btn-shima:hover {opacity: 0.6;}
+
+
+
+.input_group {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+.input_group > .input_text {
+	display: inline-block;
+	padding-left: 6px;
+	padding-right: 6px;
+	height: 100%;
+	line-height: 46px;
+	white-space: nowrap;
+	background: #ddd;
+	box-sizing: border-box;
+}
+
+input.warn {
+	border: $danger 3px solid;
+	animation: shiv 0.2s infinite;
+}
+@keyframes shiv {
+    0% {transform: translate(0px, 0px) rotateZ(0deg)}
+    25% {transform: translate(2px, 2px) rotateZ(1deg)}
+    50% {transform: translate(0px, 2px) rotateZ(0deg)}
+    75% {transform: translate(2px, 0px) rotateZ(-1deg)}
+    100% {transform: translate(0px, 0px) rotateZ(0deg)}
+}

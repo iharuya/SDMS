@@ -1,0 +1,47 @@
+.header {
+	height: 30px;
+	width: 100%;
+	padding-left: 10px;
+	padding-right: 10px;
+	position: relative;
+	background: $dark-green;
+	display: flex;
+	justify-content: space-between;
+	line-height: 30px;
+	color: white;
+	box-shadow: 0 2px 5px $shadow;
+
+	> div {
+		height: 30px;
+		min-width: 60px;
+	}
+
+	&__logo {
+		flex-grow: 100;
+		font-weight: bold;
+	}
+
+	&__chatbtn {
+		> button {
+			background-image: url('../img/chat1.svg');
+			background-size: contain;
+			width: 60px;
+			height: 100%;
+			background-repeat: no-repeat;
+			background-position: center center;
+			margin: 0 auto;
+		}
+	}
+
+	&__detailbtn {
+		> button {
+			background-image: url('../img/info.svg');
+			background-size: contain;
+			width: 60px;
+			height: 100%;
+			background-repeat: no-repeat;
+			background-position: center center;
+			margin: 0 auto;
+		}
+	}
+}

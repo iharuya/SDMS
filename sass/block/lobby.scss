@@ -1,0 +1,85 @@
+.lobby {
+	opacity: 0;
+	transition: all 0.8s;
+	&.active {
+		opacity: 1;
+	}
+
+	&__title {
+		font-size:46px;
+		padding-top: 60px;
+		padding-bottom: 10px;
+		text-align:center;
+		font-weight:bold;
+		position: relative;
+		line-height: 1.05;
+
+		@include mq('xsd') {
+			font-size: 36px;
+		}
+	}
+
+	&__version {
+		font-size: 20px;
+		position: absolute;
+		top: 30px; left: 20px;
+		transform: rotate(-20deg);
+		animation: puyo 1s ease-in-out infinite;
+	}
+
+	&__userform, &__mainops {
+		display: none;
+		text-align: center;
+		padding-top: 30px;
+		padding-bottom: 20px;
+
+		&.active {
+			display: block;
+		}
+	}
+
+	&__userform {
+		background: rgba($light-green, 0.6);
+		width: 90%;
+		max-width: 400px;
+		margin: 0 auto;
+		margin-bottom: 30px;
+		overflow: hidden;
+		border-radius: 10px;
+		text-align: center;
+
+		p {
+			padding: 1rem 2rem;
+			font-size: 1.4rem;
+			margin-bottom: 6px;
+			border-top: 3px dotted #000;
+			border-bottom: 3px dotted #000;
+		}
+
+		> .input_group {
+			padding: 20px 0;
+		}
+		input {
+			margin-bottom: 20px;
+		}
+	}
+
+	&__mainops {
+		> button {
+			margin-bottom: 20px;
+		}
+	}
+
+}
+
+@keyframes puyo {
+	0% {
+		transform: rotate(-20deg);
+	}
+	50% {
+		transform: rotate(-20deg) skew(-5deg, -5deg) scale(1.5);
+	}
+	100% {
+		transform: rotate(-20deg);
+	}
+}

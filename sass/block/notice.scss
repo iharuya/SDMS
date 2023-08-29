@@ -1,0 +1,74 @@
+.notice {
+	&__wrap {
+		background: transparent;
+		position: absolute;
+		top: 0; right: 0;
+		padding: 10px;
+		z-index: 90;
+		width: 100%;
+		max-width: 300px;
+	}
+
+	display: flex;
+	min-width: 50px;
+	background: rgba(255,255,255,0.96);
+	box-shadow: 0 2px 5px $shadow;
+	border-radius: 10px;
+	overflow: hidden;
+	animation: hide 1s ease-in 5s 1 normal both;
+	/* jsで6秒後に削除 */
+
+	&.important {
+		background: lighten($danger, 20%);
+		border: $danger solid 2px;
+		font-size: 18px;
+		font-weight: bold;
+	}
+
+	&:not(:last-child) {
+		margin-bottom: 10px;
+	}
+
+	&__msg {
+		padding: 5px 8px;
+		align-self: center;
+		width: 70%;
+		word-wrap: break-word;
+		margin: 0;
+		display: inline;
+	}
+
+	&__close {
+		background: transparent;
+		width: 30%;
+		align-self: stretch;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0;
+		padding: 0;
+
+		&:hover {
+			opacity: 0.6;
+			background: rgba(200,200,200,0.9);
+		}
+
+		&-img {
+			width: 40px;
+			height: 40px;
+			background-image: url('../img/del_black.svg');
+			background-repeat: no-repeat;
+			opacity: 0.8;
+		}
+	}
+
+
+}
+
+@keyframes hide {
+	0% {opacity: 1;}
+	100% {
+		display: none;
+		opacity: 0;
+	} 
+}

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ja" data-env="<%= env %>">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Super Duper Minesweeper!</title>
+	<meta name="description" content="とってもすごいマインスイーパー！自由にサイズをカスタムして、オンラインバトルで世界中のプレイヤー（笑）とたくさんのモードで競い合おう！">
+
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="icon" type="image/png" sizes="16x16" href="./img/sdms.png">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+<body>
+	
+	<div class="screen" id="screen">
+
+		<div id="loading__wrap" class="loading__wrap">
+			<div class="loading">
+				<img src="./img/loading.gif" alt="loading..." class="loading__img">
+				<p class="loading__text">Loading...</p>
+			</div>
+		</div>
+
+
+		<div class="chat__wrap" id="chat__wrap">
+			<div class="chat" id="chat">
+				<div class="chat__head">
+					<h3>グローバルチャット</h3>
+					<button class="chat__close btn-reset" id="close_chat_btn"></button>
+				</div>
+				<ul class="chat__area" id="chat__area">
+					<template id="chat__tmp">
+						<li class="chat__item">
+							<span class="chat__item-sender"></span>
+							<span class="chat__item-time"></span>
+							<p class="chat__item-msg"></p>
+						</li>
+					</template>
+				</ul>
+				<form class="chat__control" id="chat__control">
+					<input type="text" class="chat__control-input" placeholder="入力してください" id="chat__control-input">
+					<button type="submit" class="chat__control-submit btn-reset" id="chat__control-submit"></button>
+				</form>
+			</div>
+		</div>
+
+		<div class="detail__wrap" id="detail__wrap">
+			<div class="detail" id="detail">
+				<div class="detail__head">
+					<h3>詳細</h3>
+					<button class="detail__close btn-reset" id="close_detail_btn"></button>
+				</div>
+				<div class="detail__info">
+					<div class="detail__info-user">
+						<h4>Your Info</h4>
+						<p class="detail__info-user-name">名前: <span id="detail_username">まだログインしていません</span></p>
+						<p class="detail__info-user-id">ID: <span id="detail_userid"></span></p>
+						<button class="detail__info-user-reset" id="user_reset_btn">リセット</button>
+					</div>
+					<div class="detail__info-usernumber">
+						<h4>接続数</h4>
+						<span id="detail_usernum"></span>人がログインしています
+					</div>
+
+					<hr>
+
+					<h4>History</h4>
+					<div class="detail__info-history history">
+						<% history.forEach((data, i) => { %>
+						<div class="history__item <%= i === 0 ? 'active' : '' %>">
+							<button class="history__item-head btn-reset">
+								<h5 class="history__item-head-version"><%= data.version %></h5>
+								<div class="history__item-head-date"><%= data.date %></div>
+							</button>
+							<div class="history__item-body">
+								<div class="history__item-title"><%= data.title %></div>
+								<% if (typeof data.description !== 'undefined') { %> 
+									<div class="history__item-description"><%= data.description %></div>
+								<% } %>
+								<% if (typeof data.tech !== 'undefined') { %> 
+									<div class="history__item-tech"><%= data.tech %></div>
+								<% } %>
+							</div>
+						</div>
+						<% }) %> 
+					</div>
+
+					<hr>
+
+				</div>
+			</div>
+		</div>
+
+		<header class="header">
+			<div class="header__logo">
+				<span>SDMS</span>
+			</div>
+			<div class="header__chatbtn">
+				<button id="open_chat_btn" class="btn-reset active"></button>
+			</div>
+			<div class="header__detailbtn">
+				<button id="open_detail_btn" class="btn-reset active"></button>
+			</div>
+		</header>
+
+
+		<main class="main">
+			<div class="notice__wrap" id="notice__wrap">
+				<template id="notice__tmp">
+					<div class="notice">
+						<p class="notice__msg"></p>
+						<button class="notice__close">
+							<div class="notice__close-img"></div>
+						</button>
+					</div>
+				</template>
+			</div>
+	
+			<div class="lobby active" id="lobby">
+				<h1 class="lobby__title text-grow" id="lobby__title">Super Duper Minesweeper!<span class="lobby__version text-grow" id="lobby__version"><%= version %></span></h1>
+	
+				<form id="lobby__userform" class="lobby__userform active">
+					<p>ユーザー名を設定してください</p>
+					<div class="input_group">
+						<input type="text" id="f_username" required>
+					</div>
+					
+					<button type="submit" class="main-btn text-grow box-grow">Login</button>
+				</form>
+	
+				<div class="lobby__mainops" id="lobby__mainops">
+					<button class="main-btn text-grow box-grow" id="solo_btn">ソロプレイ</button>
+					<button class="main-btn text-grow box-grow" id="multi_btn">マルチプレイ</button>
+				</div>	
+			</div>
+
+			<form id="gconf" class="gconf">
+				<div class="gconf__head">
+					<button type="button" class="gconf__head-back" id="gconf__head-back">もどる</button>
+					<h2 id="gconf__head-title" class="gconf__head-title text-grow"></h2>
+				</div>
+
+				<div class="gconf__inputs">
+					<div class="input_group">
+						<span class="input_text">幅</span>
+						<input type="number" id="f_width" value="8" required>
+					</div>
+					<div class="input_group">
+						<span class="input_text">高さ</span>
+						<input type="number" id="f_height" value="10" required>
+					</div>
+					<div class="input_group">
+						<span class="input_text">爆弾</span>
+						<input type="number" id="f_bomb" value="20" required>
+					</div>
+				</div>
+				<div class="gconf__templates">
+					<button type="button" id="temp_low">低</button>
+					<button type="button" id="temp_medium">中</button>
+					<button type="button" id="temp_high">高</button>
+					<button type="button" id="temp_duper">Duper</button>
+				</div>
+				<div class="input_group">
+					<button type="submit" class="main-btn text-grow box-grow" id="gconf__submit"></button>
+				</div>
+			</form>
+	
+			<div class="rooms" id="rooms__wrap">
+				<div class="rooms__head">
+					<button class="rooms__head-back" id="room__back">もどる</button>
+					<h2 class="rooms__head-title">ルーム</h2>
+					<button class="rooms__head-create" id="create__room">ルーム作成</button>
+				</div>
+				<div class="rooms__body-wrap">
+					<div class="rooms__body" id="rooms">
+						<template id="roomcard__tmp">
+							<div class="roomcard">
+								<div class="roomcard__owner roomcard__elm"></div>
+								<div class="roomcard__width roomcard__elm">幅 </div>
+								<div class="roomcard__height roomcard__elm">高さ </div>
+								<div class="roomcard__bomb roomcard__elm">爆弾 </div>
+								<div class="roomcard__status roomcard__elm"></div>
+								<div class="roomcard__btns">
+									<button class="roomcard__join roomcard__btns-btn">入室</button>
+									<button class="roomcard__observe roomcard__btns-btn" disabled>観戦</button>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+			</div>
+	
+			<div class="matchwait" id="matchwait">
+				<button class="matchwait__back" id="matchwait__back">もどる</button>
+				
+				<div class="matchwait__wait" id="matchwait__wait">
+					<h2 class="matchwait__wait-title text-grow">プレイヤーが参加するのを待っています...</h2>
+					<div class="matchwait__wait-body">
+						<p>ルーム名: <span id="matchwait__wait-rooname"></span></p>
+					</div>
+				</div>
+
+				<div class="matchwait__done" id="matchwait__done">
+					<h2 class="matchwait__done-title text-grow">マッチが完了しました。</h2>
+					<div class="matchwait__done-body">
+						<p>相手: <span id="matchwait__done-opp"></span></p>
+						<p><span id="game_start_in"></span>秒後に開始します</p>
+						<p>※はじめのマスは自動でクリックされます</p>
+					</div>
+				</div>
+			</div>
+	
+			<!-- start g_wrap -->
+			<div class="g_wrap" id="g_wrap">
+				<div class="g_field" id="g_field">
+					
+					<div class="b_wrap" id="b_wrap">
+						<div class="b_head">
+							<div class="b_head_flags_outer b_head_item">
+								<img src="./img/flag.svg" alt="" class="b_head_flag_img" width="30px">
+								<p id="h_flags"></p>
+							</div>
+	
+							<div class="time b_head_time_outer b_head_item">
+								<div id="h_time" class="b_head_time">00:00</div>
+							</div>
+	
+							<div class="b_head_sound_btns b_head_item">
+								<button id="allow_sound" class="sound_btn active"></button>
+								<button id="forbit_sound" class="sound_btn"></button>
+							</div>
+							<div class="b_head_menu_btn_outer" id="open_menu_outer">
+								<button id="open_menu_btn" class="b_head_menu_btn"></button>
+							</div>
+						</div>
+						
+						<div class="board" id="board"></div>
+						
+						<div class="sel_mask" id="sel_mask"></div>
+						<div class="sel" id="sel">
+							<button id="sel_cancel" class=""></button>
+							<button id="sel_unflag" class=""></button>
+							<button id="sel_flag" class=""></button>
+							<button id="sel_dig" class=""></button>
+						</div>
+					</div>
+	
+				</div>
+	
+				<div class="menu" id="menu">
+					<button id="close_menu_btn" class="close_menu_btn">とじる</button>
+					<button class="quit_btn btn-shima" id="exit_btn"><span>Exit Game</span></button>
+	
+					<button class="widen_menu_btn" id="widen_menu_btn" data-display="&lt|"></button>
+					<div class="menu_common">
+						<h3>状態：<span id="b_status"></span></h3>
+					</div>
+	
+					<div class="opp_waiting active" id="opp_waiting">
+						<h3>相手の情報を取得しています...</h3>
+					</div>
+					<div class="opp" id="opp">
+						<h2>相手のボード</h2>
+						<h3>相手の状態：<span id="opp_status"></span></h3>
+						<div class="opp_field" id="opp_field">
+							<div class="opp_wrap" id="opp_wrap">
+								<div class="opp_head" id="opp_head">
+									<div class="opp_head_flags_outer opp_head_item">
+										<img src="./img/flag.svg" alt="" class="b_head_flag_img" width="30px">
+										<p id="opp_flags"></p>
+									</div>
+								</div>
+								
+								<div class="opp_board" id="opp_board"></div>
+							</div>
+						</div>
+						<div class="opp_data">
+							<h3>相手の情報</h3>
+							<p>名前：<span id="opp_name"></span></p>
+							<p>幅：<span id="opp_width"></span></p>
+							<p>高さ：<span id="opp_height"></span></p>
+						</div>
+	
+					</div>
+				</div>
+	
+			</div>
+			<!-- end g_wrap -->
+	
+		</main>
+
+
+		<div class="result_modal modal_wrap" id="clear_modal">
+			<div class="clear_modal modal">
+				<div class="result">
+					<img src="./img/congrats.svg" class="victory_img" id="victory_img">
+					<div class="result_time" id="clear_result_time">00:00</div>
+				</div>
+				<div class="controls">
+					<button id="close_clear_modal" class="close_result_modal"><span>CLOSE</span></button>
+					<button class="restart_btn active"><span>RESTART</span></button>
+				</div>
+			</div>
+		</div>
+
+		<div class="result_modal modal_wrap" id="fail_modal">
+			<div class="fail_modal modal">
+				<div class="result">
+					<img src="./img/fail.svg" class="fail_img" id="fail_img">
+					<div class="result_time" id="fail_result_time">00:00</div>
+				</div>
+				<div class="controls">
+					<button id="close_fail_modal" class="close_result_modal"><span>CLOSE</span></button>
+					<button class="restart_btn active"><span>RESTART</span></button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script>
+		document.getElementById("screen").style.height = window.innerHeight + 'px';
+	</script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="./js/app.js" type="module"></script>
+</body>
+</html>

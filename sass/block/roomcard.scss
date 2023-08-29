@@ -1,0 +1,44 @@
+.roomcard {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 10px;
+	border-radius: 20px;
+	border: 1px solid #333;
+	margin-bottom: 10px;
+
+	&__elm {
+		padding: 0 10px;
+	}
+
+	&__owner {
+		color: tomato;
+	}
+
+	&__status {
+		&[data-status='waiting'] {
+			color: rgb(19, 183, 233);
+		}
+		&[data-status='matched'] {
+			color: rgb(34, 187, 34);
+		}
+		&[data-status='ongame'] {
+			color: rgb(233, 64, 64);
+		}
+		&[data-status='ended'] {
+			color: rgb(63, 63, 63);
+		}
+	}
+
+	&__btns {
+		margin-left: auto;
+		
+		&-btn {
+			margin: 0 10px;
+			display: inline-block;
+
+			&:disabled, &:disabled:hover {
+				opacity: 0.6;
+			}
+		}
+	}
+}

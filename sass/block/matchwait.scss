@@ -1,0 +1,37 @@
+.matchwait {
+	width: 90%;
+	text-align: center;
+	padding: 30px 0;
+	display: none;
+	margin: 0 auto;
+
+	&.active {
+		display: block;
+	}
+
+	p {
+		padding-bottom: 10px;
+	}
+
+	
+	&__wait {
+		display: none;
+		&.active {
+			display: block;
+		}
+	}
+	
+	&__done {
+		display: none;
+		&.active {
+			display: block;
+		}
+	}
+	
+	&__wait-body, &__done-body {
+		background: rgba(255, 255, 255, 0.8);
+		font-size: 18px;
+		padding-top: 10px;
+		border-radius: 20px;
+	}
+}
