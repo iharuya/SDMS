@@ -1,5 +1,9 @@
 # SDMS - Super Duper Minesweeper (Archived)
 
+## Description
+
+💣リアルタイムで他者と対戦できるマインスイーパー💣
+
 作成: 2020年
 
 最終動作確認: 2023年
